@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="record_pos_theme_1" model="pos.theme">
+            <field name="name">Responsive POS Theme</field>
+            <field name="cart_position">left_side</field>
+            <field name="image_display_in_cart" eval="True"/>
+            <field name="action_button_position">right_side</field>
+            <field name="mobile_start_screen">product_screen</field>
+            <field name="theme_style">style_1</field>
+            <field name="primary_color">#673ab7</field>
+            <field name="even_row_color">#dee2e6</field>
+            <field name="odd_row_color">#FFFFFF</field>
+            <field name="secondary_color">#dee2e6</field>
+            <field name="button_style">style_1</field>
+            <field name="product_style">style_1</field>
+            <field name="body_background_type">bg_color</field>
+            <field name="body_background_color">#FFFFFF</field>
+            <field name="body_font_family">Roboto</field>
+        </record>
+
+    </data>
+</odoo>

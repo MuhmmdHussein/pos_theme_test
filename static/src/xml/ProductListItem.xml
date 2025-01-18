@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="pos_theme.ProductListItem">
+        <tr t-on-keypress="(event) => event.code === 'Space' ? props.onClick(event) : ()=>{}"
+            t-on-click="props.onClick"
+            t-att-data-product-id="props.productId" t-attf-aria-labelledby="article_product_{{props.productId}}">
+            <td class="d-flex flex-column justify-content-start align-items-start">
+                <button class="control-button btn text-info fw-bolder disabled rounded-circle me-2 p-1 m-1"
+                        t-esc="props.number"/>
+                <button class="control-button btn btn-light fw-bolder rounded-circle me-2 p-1 m-1"
+                        t-if="props.productInfo"
+                        t-on-click.stop="props.onProductInfoClick">
+                    <i class="fa fa-info" role="img" aria-label="Product Information"
+                       title="Product Information"/>
+                </button>
+                <button class="control-button btn btn-light fw-bolder rounded-circle me-2 p-1 m-1"
+                      t-on-click.stop="props.onProductMagnifyImageClick">
+                    <i class="fa fa-plus-square" role="img" aria-label="Product Magnify Image"
+                        title="Product Magnify Image"/>
+                </button>
+            </td>
+            <td>
+                <div>
+                    <t t-if="props.imageUrl">
+                        <img class="product-img" t-att-src="props.imageUrl" t-att-alt="props.name"/>
+                    </t>
+                    <span class="overflow-hidden lh-sm fw-bolder product-name"
+                          t-att-class="{'no-image': !props.imageUrl}"
+                          t-attf-id="article_product_{{props.productId}}"
+                          t-esc="props.name"/>
+                </div>
+            </td>
+            <t t-if="env.services.pos.pos_theme_settings_data[0].display_product_code">
+                <td>
+                    <t t-if="props.product.default_code">
+                        <t t-esc="props.product.default_code" />
+                    </t>
+                    <t t-else="">
+                        -
+                    </t>
+                </td>
+            </t>
+            <t t-if="env.services.pos.pos_theme_settings_data[0].display_product_type">
+                <td>
+                    <t t-if="props.product.type == 'consu'">
+                        Consumable
+                    </t>
+                    <t t-if="props.product.type == 'product'">
+                        Storable
+                    </t>
+                    <t t-if="props.product.type == 'service'">
+                        Service
+                    </t>
+                </td>
+            </t>
+            <t t-if="env.services.pos.pos_theme_settings_data[0].display_product_uom">
+                <td>
+                    <t t-esc="props.product.uom_id[1]" />
+                </td>
+            </t>
+            <t t-if="env.services.pos.pos_theme_settings_data[0].display_product_price">
+                <td>
+                   <t t-esc="props.price"/>
+                </td>
+            </t>
+        </tr>
+    </t>
+
+</templates>

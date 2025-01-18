@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="pos_theme.ProductCard" t-inherit="point_of_sale.ProductCard" t-inherit-mode="extension">
+        <xpath expr="article" position="attributes">
+            <attribute name="t-att-style">'width:' + pos.config.product_width + 'em !important; height:' + pos.config.product_height + 'em !important;'</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('product-information-tag')]" position="replace">
+            <div class="product-information-tag">
+                <i t-if="props.productInfo" class="product-information-tag-logo fa fa-info" role="img"
+                   t-on-click.stop="props.onProductInfoClick"
+                   aria-label="Product Information" title="Product Information" />
+
+                <i class="product-magnify-icon fa fa-plus-square" role="img"
+                    t-on-click.stop="props.onProductMagnifyImageClick"
+                   aria-label="Product Magnify Image" title="Product Magnify Image" />
+            </div>
+        </xpath>
+        <xpath expr="//div[hasclass('product-name')]" position="attributes">
+            <attribute name="t-att-style">'font-size:' + pos.config.product_name_font_size + 'px !important;'</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('product-img')]" position="attributes">
+            <attribute name="t-att-style">'width:' + pos.config.product_image_width + '% !important; height:' + pos.config.product_image_height + '% !important;'</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('product-img')]" position="attributes">
+            <attribute name="t-if">props.imageUrl and env.services.pos.pos_theme_settings_data and env.services.pos.pos_theme_settings_data[0] and env.services.pos.pos_theme_settings_data[0].display_product_image_name and (env.services.pos.pos_theme_settings_data[0].display_product_image_name == 'image' || env.services.pos.pos_theme_settings_data[0].display_product_image_name == 'image_name')</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('product-name')]" position="attributes">
+            <attribute name="t-if">env.services.pos.pos_theme_settings_data and env.services.pos.pos_theme_settings_data[0] and env.services.pos.pos_theme_settings_data[0].display_product_image_name and (env.services.pos.pos_theme_settings_data[0].display_product_image_name == 'product_name' || env.services.pos.pos_theme_settings_data[0].display_product_image_name == 'image_name')</attribute>
+        </xpath>
+        <xpath expr="//span[hasclass('price-tag')]" position="after">
+            <span t-if="env.services.pos.isMobile &amp;&amp; env.services.pos.get_order().product_with_qty &amp;&amp; env.services.pos.get_order().product_with_qty[props.productId]" class="counter-tag">
+				<t t-esc="env.services.pos.get_order().product_with_qty[props.productId]"/>
+			</span>
+        </xpath>
+    </t>
+
+</templates>

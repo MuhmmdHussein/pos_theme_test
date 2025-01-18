@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <record id="view_inheri_res_config_settings_form" model="ir.ui.view">
+            <field name="name">view.inherit.res.config.settings.form</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="pos_base.view_inherit_res_config_settings_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='products']//group[@name='products_left']" position="inside">
+                    <field name="auto_clear_search_box"/>
+                </xpath>
+                <xpath expr="//page[@name='theme']//group[@name='theme_left']" position="inside">
+                    <separator string="General"/>
+                    <field name="logo" widget="image" class="oe_avatar"/>
+                    <field name="enable_switch_mode"/>
+                    <field name="action_buttons_default_state"/>
+                    <separator string="Orders"/>
+                    <field name="order_cart_width"/>
+                    <field name="order_line_font_weight"/>
+                    <field name="order_line_font_size"/>
+                    <field name="order_summary_font_weight"/>
+                    <field name="order_summary_font_size"/>
+                </xpath>
+                <xpath expr="//page[@name='theme']//group[@name='theme_right']" position="inside">
+                    <separator string="POS Categories"/>
+                    <field name="pos_category_display"/>
+                    <field name="freeze_vertical_category_column"
+                           invisible="pos_category_display != 'vertical'"/>
+                    <field name="pos_category_width"/>
+                    <separator string="Products"/>
+                    <field name="products_display"/>
+                    <field name="products_display_limit"/>
+                    <field name="product_width"/>
+                    <field name="product_height"/>
+                    <field name="product_gap"/>
+                    <field name="product_image_width"/>
+                    <field name="product_image_height"/>
+                    <field name="product_name_font_size"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

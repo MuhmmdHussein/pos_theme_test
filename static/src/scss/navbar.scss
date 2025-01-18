@@ -1,0 +1,51 @@
+.pos{
+    .pos-topheader{
+        .status-buttons{
+            .btn.btn-light{
+                background-color: $pos_primary_color ;border-color: $pos_primary_color ;
+                .cashier-name{
+                    .username{
+                        color: #FFFFFF;
+                    }
+                }
+            }
+            .menu-item{
+                span{
+                    color: #FFFFFF;
+                }
+            }
+        }
+        .pos-rightheader{
+            .cart_badge{
+                position: relative;font-size: 20px;color: #FFFFFF;
+                &:after{
+                    background: darken($pos_primary_color, 10%);border-radius: 10rem;color: #fff;content: attr(badge);font-size: 13px;padding: 4px;position: absolute;text-align: center;min-width: 20px;left: 0.9em;bottom: 0.9em;line-height: 14px;display: flex;align-items: center;justify-content: center;
+                }
+            }
+            @include media-breakpoint-down(lg){
+                .order-button{
+                    color: #FFFFFF;
+                }
+            }
+        }
+        .navbar-button.btn.btn-light.menu-button{
+            background-color: $pos_primary_color ;border-color: $pos_primary_color ;color: #FFFFFF;
+            .menu-item{
+                .sub-menu.dropdown-menu{
+                    li{
+                        .dropdown-item{
+                            transition: all .5s;
+                            &:hover, &:active, &:focus{
+                                color: $pos_primary_color;background: $pos_secondary_color;cursor: pointer;
+                            }
+                            .badge.text-bg-info.rounded-pill{
+                                background: $pos_primary_color !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        background-color: $pos_primary_color !important;
+    }
+}

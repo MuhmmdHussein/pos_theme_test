@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="pos_theme.ActionpadWidget" t-inherit="point_of_sale.ActionpadWidget" t-inherit-mode="extension">
+        <xpath expr="//button[hasclass('mobile-more-button')]" position="attributes">
+            <attribute name="style">display:none;</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('actionpad')]" position="replace">
+            <div class="actionpad d-flex flex-row p-2 border-end">
+                <div class="d-flex flex-column w-50">
+                    <button class="button set-partner border btn btn-light fw-bolder flex-grow-1"
+                            t-on-click="() => this.pos.selectPartner()">
+                        <div class="d-flex justify-content-start align-items-start">
+                            <span class="d-flex justify-content-center align-items-center rounded-circle me-2 p-1 text-bg-dark" t-if="!ui.isSmall">
+                                <i class="fa fa-user" role="img" aria-label="Customer" title="Customer" />
+                            </span>
+                            <div t-if="props.partner" class="text-truncate fw-bolder text-action p-1">
+                                <t t-esc="props.partner.name" />
+                            </div>
+                            <div t-else="" class="fw-bolder p-1">
+                                Customer
+                            </div>
+                        </div>
+                    </button>
+                </div>
+                <div class="d-flex flex-grow-1 w-50">
+                    <button class="pay validation pay-order-button btn-primary h-100 border"
+                            t-attf-class="{{getMainButtonClasses()}}"
+                            t-if="!ui.isSmall"
+                            t-on-click="props.actionToTrigger ? this.props.actionToTrigger : () => pos.get_order().pay()">
+                        <t t-if="props.actionType == 'refund'">
+                            <t class="text-white" t-esc="props.actionName"/>
+                        </t>
+                        <t t-else="">
+                            <t class="text-white">Pay</t>
+                            <br/>
+                            <span>
+                                <t t-esc="env.utils.formatCurrency(pos.get_order().get_total_with_tax())"/>
+                            </span>
+                            <span class="shortcut-keyboard" t-if="!ui.isSmall" style="color: #fff">
+                                <i class="fa fa-keyboard-o"/>
+                                <i class="fa fa-arrow-right"/>
+                            </span>
+                        </t>
+                    </button>
+                </div>
+            </div>
+        </xpath>
+    </t>
+
+</templates>

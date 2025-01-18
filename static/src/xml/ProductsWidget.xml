@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="pos_theme.ProductsWidget" t-inherit="point_of_sale.ProductsWidget" t-inherit-mode="extension">
+        <xpath expr="//CategorySelector" position="attributes">
+            <attribute name="t-if">pos.config.pos_category_display == 'horizontal'</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('product-list-empty')]" position="replace"/>
+        <xpath expr="//div[@t-if='productsToDisplay.length != 0 and pos.posHasValidProduct()']" position="replace">
+            <div class="d-flex flex-row align-items-start flex-grow-1">
+                <div class="product_list_view d-flex flex-wrap flex-grow-1"
+                    t-if="pos.config.products_display == 'list' and productsToDisplay.length != 0 and pos.posHasValidProduct()">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Product</th>
+                                <t t-if="env.services.pos.pos_theme_settings_data[0].display_product_code">
+                                    <th>Code</th>
+                                </t>
+                                <t t-if="env.services.pos.pos_theme_settings_data[0].display_product_type">
+                                    <th>Type</th>
+                                </t>
+                                <t t-if="env.services.pos.pos_theme_settings_data[0].display_product_uom">
+                                    <th>UOM</th>
+                                </t>
+                                <t t-if="env.services.pos.pos_theme_settings_data[0].display_product_price">
+                                    <th>Price</th>
+                                </t>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="number" t-value="1"/>
+                            <t t-foreach="productsToDisplay" t-as="product" t-key="product.id">
+                                <ProductListItem
+                                    name="product.display_name"
+                                    product="product"
+                                    productId="product.id"
+                                    number="number"
+                                    price="product.getFormattedUnitPrice()"
+                                    imageUrl="pos.show_product_images and product.getImageUrl()"
+                                    onClick="() =>this.pos.addProductToCurrentOrder(product)"
+                                    productInfo="true"
+                                    onProductInfoClick="() => this.onProductInfoClick(product)"
+                                    onProductMagnifyImageClick="() => this.onProductMagnifyImageClick(product)"
+                                />
+                                <t t-set="number" t-value="number+1"/>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+                <div t-elif="pos.config.products_display == 'card' and productsToDisplay.length != 0 and pos.posHasValidProduct()"
+                         t-att-style="'gap:' + pos.config.product_gap + 'em !important;grid-template-columns: repeat(auto-fill, minmax(' + pos.config.product_width + 'em, 1fr)) !important;'"
+                         t-attf-class="product-list {{this.pos.productListViewMode}} flex-grow-1 p-1">
+                        <t t-foreach="productsToDisplay" t-as="product" t-key="product.id">
+                            <ProductCard
+                                class="pos.productViewMode"
+                                name="product.display_name"
+                                productId="product.id"
+                                price="product.getFormattedUnitPrice()"
+                                imageUrl="pos.show_product_images and product.getImageUrl()"
+                                onClick="() =>this.pos.addProductToCurrentOrder(product)"
+                                productInfo="true"
+                                onProductInfoClick="() => this.onProductInfoClick(product)"
+                                onProductMagnifyImageClick="() => this.onProductMagnifyImageClick(product)"
+                            />
+                        </t>
+                    </div>
+                <div t-else="" class="product-list-empty no-results-message text-center mt-5 w-100">
+                    <t t-if="searchWord">
+                        <p>No products found for <b>"<t t-esc="searchWord"/>"</b> in this category.</p>
+                    </t>
+                    <t t-else="">
+                        <t t-if="pos.posHasValidProduct()">
+                            <p>There are no products in this category.</p>
+                        </t>
+                        <t t-else="">
+                            <div t-if="!state.loadingDemo">
+                                <p class="text-large">No products available. Explore <a role="button" class="button-no-demo fw-bolder" t-on-click="loadDemoDataProducts">demo data</a> or <a role="button" class="button-no-demo fw-bolder" t-on-click="createNewProducts">create your own</a>.</p>
+                            </div>
+                            <div t-else="" class="block-top-header position-absolute top-0 start-0 bg-black opacity-50 w-100 h-100 z-1000">
+                                <div class="d-flex h-100 w-100 text-white flex-row align-items-center justify-content-center">
+                                    <div class="o_spinner d-flex flex-column mb-4">
+                                        <img src="/web/static/img/spin.svg" alt="Loading..."/>
+                                        Loading...
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </t>
+                </div>
+                <VerticalCategorySelector
+                    t-if="pos.config.pos_category_display == 'vertical' and state.showAllCategories"
+                    categories="getVerticalCategories()"
+                    onClick="(id) => this.onClickCategory(id)"
+                    showImage="showCategoryImages"
+                    selected="this.pos.selectedCategoryId"
+                    class="ui.isSmall ? 'scrollbar-hidden' : ''"
+                />
+            </div>
+        </xpath>
+        <xpath expr="//Input" position="attributes">
+            <attribute name="class">pos.config.pos_category_display == 'horizontal'? 'p-2' : 'p-2 flex-grow-1'</attribute>
+        </xpath>
+        <xpath expr="//Input" position="after">
+            <div class="flex-grow-0 fw-bolder rounded-2 p-1 d-flex align-items-center justify-content-center"
+                 t-if="pos.config.pos_category_display == 'vertical'">
+                <button class="border btn btn-light"
+                        t-on-click="actionShowAllCategories">
+                    <span title="All Categories">
+                        <i class="fa fa-home"/>
+                    </span>
+                </button>
+                <span class="text-center p-2 m-auto fa fa-caret-right"/>
+                <span class="col border selected-category text-center text-truncate p-2 m-2"
+                      t-att-style="'width:' + pos.config.pos_category_width + 'em !important;' + 'max-width:' + pos.config.pos_category_width + 'em !important;'">
+                    <t t-if="selectedCategoryName" t-esc="selectedCategoryName"/>
+                    <t t-else="">All Categories</t>
+                </span>
+            </div>
+        </xpath>
+    </t>
+
+</templates>

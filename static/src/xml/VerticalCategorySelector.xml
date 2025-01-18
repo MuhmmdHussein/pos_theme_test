@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="pos_theme.VerticalCategorySelector">
+        <div t-attf-class="{{props.class}} d-flex">
+            <div class="p-1 bg-transparent">
+                <div t-foreach="props.categories" t-as="category" t-key="category.id"
+                    class="d-flex flex-column align-items-center align-items-center">
+                    <button t-if="category_index != 0"
+                        class="vertical-category-button btn btn-light d-flex align-items-center justify-content-center category-item p-1 m-1 h-100"
+                        t-att-class="{'o_disabled opacity-50': category.id == props.selected}"
+                        t-att-style="'width:' + pos.config.pos_category_width + 'em !important;' + 'max-width:' + pos.config.pos_category_width + 'em !important;'"
+                        t-on-click="() => props.onClick(category.id)">
+                        <t t-if="props.showImage">
+                            <img t-if="category.imageUrl"
+                                t-att-src="category.imageUrl"
+                                alt="Category" />
+                        </t>
+                        <i t-if="category.icon"
+                            t-attf-class="fa {{category.icon}}"
+                            aria-hidden="true" />
+                        <span t-if="category.name" class="w-75 text-center fs-5 inline-block text-truncate" t-esc="category.name" style="min-height: 1.2rem" />
+                    </button>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

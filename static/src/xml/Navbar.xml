@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="pos_theme.Navbar" t-inherit="point_of_sale.Navbar" t-inherit-mode="extension">
+        <xpath expr="//img" position="replace">
+            <t t-if="pos.config.logo">
+                <img class="pos-logo h-75 ms-3 me-auto align-self-center"
+                     t-on-click="() => debug.toggleWidget()"
+                     t-att-src="'data:image/png;base64,' + pos.config.logo"
+                     alt="Logo"/>
+            </t>
+            <t t-else="">
+                <img class="pos-logo h-75 ms-3 me-auto align-self-center"
+                     t-on-click="() => debug.toggleWidget()"
+                     src="/web/static/img/logo.png" alt="Logo" />
+            </t>
+        </xpath>
+        <xpath expr="//CashierName" position="before">
+            <t t-if="pos.config.enable_switch_mode">
+                <span class="icon-moon" t-on-click="switchMode">
+                    <i t-if="state.pos_night_mode" class="fa fa-moon-o"/>
+                    <i t-else="" class="fa fa-sun-o"/>
+                </span>
+            </t>
+            <div class="oe_icon oe_green" t-if="ui.isSmall and env.services.pos.pos_theme_settings_data and env.services.pos.pos_theme_settings_data[0] and env.services.pos.pos_theme_settings_data[0].display_cart_order_item_count">
+                <div t-att-badge="cart_item_count" class="oe_icon oe_green with-badge cart_badge">
+                    <i class="fa fa-shopping-cart cart_screen_show" aria-hidden="true"></i>
+                </div>
+            </div>
+        </xpath>
+    </t>
+
+</templates>
+
+

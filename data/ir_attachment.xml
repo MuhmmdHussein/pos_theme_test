@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="pos_theme_variables_scss" model="ir.attachment">
+            <field name="public" eval="True"/>
+            <field name="name">POS Theme Variables SCSS</field>
+            <field name="datas" type="base64" file="pos_theme/data/pos_theme_variables.scss"></field>
+            <field name="res_model">ir.ui.view</field>
+            <field name="type">binary</field>
+            <field name="mimetype">text/scss</field>
+            <field name="url">/pos_theme/static/src/overrides/pos_theme_variables.scss</field>
+        </record>
+
+    </data>
+</odoo>

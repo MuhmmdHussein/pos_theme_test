@@ -1,0 +1,110 @@
+.pos{
+    .popups{
+        .pos-theme-popup {
+            max-width: 60% !important;
+            .config-picture {
+                height: 64px;
+                width: 64px;
+                & > img {
+                    position: absolute;
+                    top: -9999px;
+                    bottom: -9999px;
+                    right: -9999px;
+                    left: -9999px;
+                    max-height: 64px;
+                    margin: auto;
+                    width: 64px;
+                    height: 64px;
+                    object-fit: cover;
+                }
+                .image-uploader {
+                    position: absolute;
+                    z-index: 1000;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    opacity: 0;
+                    cursor: pointer;
+                }
+            }
+        }
+        .product-magnify {
+            .product-image {
+                position: relative !important;
+                max-height: 80% !important;
+                max-width: 80%  !important;
+                border: red;
+                margin: auto;
+            }
+        }
+        .modal-dialog{
+            .popup{
+                .modal-footer{
+                    justify-content: center;
+                }
+                .modal-header{
+                    .modal-title{
+                        font-weight: bold;
+                    }
+                }
+                .modal-body{
+                    .form-check{
+                        .form-check-input:checked{
+                            background-color: $pos_primary_color;border-color: $pos_primary_color;
+                        }
+                    }
+                }
+                header.title{
+                    border-bottom: 1px solid #dee2e6;padding: 16px;font-weight: bold;
+                }
+                main{
+                    padding: 20px;
+                }
+                &.popup-number{
+                    .numpad{
+                        gap: 2px;
+                        &.row-cols-3{
+                            .col{
+                                width: 32.333333%;
+                                @if $pos_button_style =="style_1" {
+                                    border-radius: 5px !important;
+                                }
+                                @if $pos_button_style =="style_2" {
+                                    border-radius: 10px 0px 10px 0px !important;
+                                }
+                                @if $pos_button_style =="style_3" {
+                                    border-radius: 0px !important;
+                                }
+                            }
+                        }
+                        &.row-cols-4{
+                            .col{
+                                width: 24.333333%;
+                                @if $pos_button_style =="style_1" {
+                                    border-radius: 5px !important;
+                                }
+                                @if $pos_button_style =="style_2" {
+                                    border-radius: 10px 0px 10px 0px !important;
+                                }
+                                @if $pos_button_style =="style_3" {
+                                    border-radius: 0px !important;
+                                }
+                            }
+                        }
+                    }
+                }
+                &.popup-selection{
+                    .selection{
+                        .selection-item{
+                            margin-bottom: 5px;
+                            &.selected.active{
+                                color: $pos_primary_color !important;font-weight: bold;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

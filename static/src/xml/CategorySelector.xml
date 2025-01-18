@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="pos_theme.CategorySelector" t-inherit="point_of_sale.CategorySelector" t-inherit-mode="extension" owl="1">
+        <xpath expr="//button[hasclass('category-button')]" position="attributes">
+            <attribute name="class" remove="flex-column" separator=" "/>
+            <attribute name="t-att-style">'width:' + pos.config.pos_category_width + 'em !important;' + 'max-width:' + pos.config.pos_category_width + 'em !important;'</attribute>
+        </xpath>
+        <xpath expr="//button[hasclass('category-button')]//img" position="attributes">
+            <attribute name="class" remove="rounded h-75" separator=" "/>
+        </xpath>
+        <xpath expr="//button[hasclass('category-button')]//span" position="attributes">
+            <attribute name="class" add="w-75" remove="w-100" separator=" "/>
+        </xpath>
+    </t>
+
+</templates>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="pos_theme.ProductCheckOut" owl="1">
+        <div class="d-flex bg-transparent shadow-sm justify-content-center">
+            <div class="pos-search-bar quickly-search-customer">
+                <div class="search">
+                    <span class="search-icon">
+                        <t t-if="state.countCustomers">
+                            <span t-att-badge="state.countCustomers"
+                                  class="with-badge search-badge"
+                                  t-on-click="(ev) => this.onKeyDown(ev)">
+                                <i class="fa fa-user" aria-hidden="true"/>
+                            </span>
+                        </t>
+                        <t t-else="">
+                            <i class="fa fa-search" aria-hidden="true"/>
+                        </t>
+                    </span>
+                    <span class="clear-icon"
+                          t-on-click="resetPartner">
+                        <i aria-hidden="true" class="fa fa-user-times"/>
+                    </span>
+                    <input type="text"
+                           t-on-keydown="(ev) => this.onKeyDown(ev)"
+                           t-model="state.inputCustomer"
+                           placeholder="Search Customers ..." class="search-customer-direct"/>
+                </div>
+            </div>
+
+            <button class="checkout-right-button flex-grow-1"
+                  title="Total Products Displayed in Screen"
+                  t-on-click="setProductsDisplayLimit">
+                <i class="fa fa-laptop"/>
+            </button>
+<!--            <button class="checkout-right-button flex-grow-1"-->
+<!--                  t-on-click="addCategory"-->
+<!--                  title="Add New Category"-->
+<!--                  t-if="pos.config.create_category_direct">-->
+<!--                <i class="fa fa-plus"/>-->
+<!--            </button>-->
+<!--            <button class="checkout-right-button flex-grow-1"-->
+<!--                  t-on-click="addProduct"-->
+<!--                  title="Add new Product">-->
+<!--                  t-if="env.pos.config.create_product_direct"-->
+<!--                <i class="fa fa-plus"/>-->
+<!--            </button>-->
+            <button class="checkout-right-button flex-grow-1"
+                  title="Update POS Theme"
+                  t-on-click="() => this.UpdatePOSTheme()">
+                <i class="fa fa-cog" aria-hidden="true"></i>
+            </button>
+            <button class="checkout-right-button create-partner flex-grow-1"
+                  title="Add new Customer"
+                  t-on-click="() => this.createPartner()">
+                <i class="fa fa-user" aria-hidden="true"></i>
+            </button>
+            <button class="checkout-right-button flex-grow-1"
+                  title="Sort by Best Selling Products"
+                  t-on-click="getProductsTopSelling">
+                <i class="fa fa-certificate"/>
+            </button>
+            <button class="checkout-right-button flex-grow-1"
+                  title="Set Products Display"
+                  t-on-click="setProductsDisplay">
+                <t t-if="pos.config.products_display == 'card'">
+                    <i class="fa fa-list"/>
+                </t>
+                <t t-else="">
+                    <i class="fa fa-th"/>
+                </t>
+            </button>
+        </div>
+    </t>
+
+</templates>

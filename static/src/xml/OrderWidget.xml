@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="pos_theme.OrderWidget" t-inherit="point_of_sale.OrderWidget" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('order-summary')]" position="replace">
+            <div t-if="props.total or props.tax" class="order-summary w-100 py-1 px-3 bg-100"
+                 t-att-style="'font-weight:' + pos.config.order_summary_font_weight + ' !important;font-size:' + pos.config.order_summary_font_size + 'em !important;'">
+                <li class="d-flex justify-content-between">
+                    <div class="w-50 text-start">Total</div>
+                    <div class="text-center w-25"><t t-esc="totalItemsQty"/></div>
+                    <div class="text-end w-25"><t t-esc="props.total"/></div>
+                </li>
+            </div>
+        </xpath>
+
+    </t>
+
+</templates>

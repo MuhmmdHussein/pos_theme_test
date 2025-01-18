@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="pos_theme.PosThemePopUp">
+        <div class="popup pos-theme-popup">
+            <div class="modal-header">
+                <h4 class="modal-title"><t t-esc="props.title"/></h4>
+            </div>
+            <main class="modal-body d-flex flex-row">
+                <div class="w-50 p-2">
+                    <div class="row">
+                        <span class="info-title d-flex flex-grow-1 align-items-start">Logo</span>
+                        <div class="input-group">
+                            <div class="config-picture position-relative rounded text-center overflow-hidden">
+                                <t t-if="configImageUrl">
+                                    <img class="rounded" t-att-src="configImageUrl" alt="Logo"/>
+                                </t>
+                                <t t-else="">
+                                    <i class="fa fa-camera" role="img" aria-label="Picture" title="Picture"></i>
+                                </t>
+                                <input class="image-uploader"
+                                       t-on-change="OnChange"
+                                       type="file"
+                                       name="logo"/>
+                            </div>
+                        </div>
+                        <span class="info-title d-flex flex-grow-1 align-items-start">Order Cart Width (%)</span>
+                        <div class="input-group">
+                            <input class='form-control'
+                                   t-att-value="changes.order_cart_width"
+                                   t-on-change="OnChange"
+                                   type="number"
+                                   name="order_cart_width"/>
+                        </div>
+                        <span class="info-title d-flex flex-grow-1 align-items-start">Order Summary Font size (em)</span>
+                        <div class="input-group">
+                            <input class='form-control'
+                                   t-att-value="changes.order_summary_font_size"
+                                   t-on-change="OnChange"
+                                   type="number"
+                                   name="order_summary_font_size"/>
+                        </div>
+                        <span class="info-title d-flex flex-grow-1 align-items-start">Order Summary Font Weight</span>
+                        <div class="input-group">
+                            <select class='form-control'
+                                    t-on-change="OnChange"
+                                    name='order_summary_font_weight'>
+                                <option value='normal'
+                                        t-att-selected="changes.order_summary_font_weight == 'normal' ? true : undefined">
+                                    Normal
+                                </option>
+                                <option value='bold'
+                                        t-att-selected="changes.order_summary_font_weight == 'bold' ? true : undefined">
+                                    Bold
+                                </option>
+                            </select>
+                        </div>
+                        <span class="info-title d-flex flex-grow-1 align-items-start">Order Line Font size (em)</span>
+                        <div class="input-group">
+                            <input class='form-control'
+                                   t-att-value="changes.order_line_font_size"
+                                   t-on-change="OnChange"
+                                   type="number"
+                                   name="order_line_font_size"/>
+                        </div>
+                        <span class="info-title d-flex flex-grow-1 align-items-start">Order Line Font Weight</span>
+                        <div class="input-group">
+                            <select class='form-control'
+                                    t-on-change="OnChange"
+                                    name='order_line_font_weight'>
+                                <option value='normal'
+                                        t-att-selected="changes.order_line_font_weight == 'normal' ? true : undefined">
+                                    Normal
+                                </option>
+                                <option value='bold'
+                                        t-att-selected="changes.order_line_font_weight == 'bold' ? true : undefined">
+                                    Bold
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-50 p-2">
+                    <div class="row">
+                        <span class="info-title d-flex flex-grow-1 align-items-start">Products Display</span>
+                        <div class="input-group">
+                            <select class='form-control'
+                                    t-on-change="OnChange"
+                                    name='products_display'>
+                                <option value='list'
+                                        t-att-selected="changes.products_display == 'list' ? true : undefined">List</option>
+                                <option value='card'
+                                        t-att-selected="changes.products_display == 'card' ? true : undefined">Card</option>
+                            </select>
+                        </div>
+                        <span class="info-title d-flex flex-grow-1 align-items-start">Product Width (em)</span>
+                        <div class="input-group">
+                            <input class='form-control'
+                                   t-att-value="changes.product_width"
+                                   t-on-change="OnChange"
+                                   type="number"
+                                   name="product_width"/>
+                        </div>
+                        <span class="info-title d-flex flex-grow-1 align-items-start">Product Height (em)</span>
+                        <div class="input-group">
+                            <input class='form-control'
+                                   t-att-value="changes.product_height"
+                                   t-on-change="OnChange"
+                                   type="number"
+                                   name="product_height"/>
+                        </div>
+                        <span class="info-title d-flex flex-grow-1 align-items-start">Product Gap (em)</span>
+                        <div class="input-group">
+                            <input class='form-control'
+                                   t-att-value="changes.product_gap"
+                                   t-on-change="OnChange"
+                                   type="number"
+                                   name="product_gap"/>
+                        </div>
+                        <span class="info-title d-flex flex-grow-1 align-items-start">Product Image Width (%, 0 ~ 100%)</span>
+                        <div class="input-group">
+                            <input class='form-control'
+                                   t-att-value="changes.product_image_width"
+                                   t-on-change="OnChange"
+                                   type="number"
+                                   name="product_image_width"/>
+                        </div>
+                        <span class="info-title d-flex flex-grow-1 align-items-start">Product Image Height (%, 0 ~ 100%)</span>
+                        <div class="input-group">
+                            <input class='form-control'
+                                   t-att-value="changes.product_image_height"
+                                   t-on-change="OnChange"
+                                   type="number"
+                                   name="product_image_height"/>
+                        </div>
+                        <span class="info-title d-flex flex-grow-1 align-items-start">Product Name Font Size (px, 13 ~ 20px)</span>
+                        <div class="input-group">
+                            <input class='form-control'
+                                   t-att-value="changes.product_name_font_size"
+                                   t-on-change="OnChange"
+                                   type="number"
+                                   name="product_name_font_size"/>
+                        </div>
+                        <span class="info-title d-flex flex-grow-1 align-items-start">Pos Category Display</span>
+                        <div class="input-group">
+                            <select class='form-control'
+                                    t-on-change="OnChange"
+                                    name='pos_category_display'>
+                                <option value='horizontal'
+                                        t-att-selected="changes.pos_category_display == 'horizontal' ? true : undefined">Horizontal</option>
+                                <option value='vertical'
+                                        t-att-selected="changes.pos_category_display == 'vertical' ? true : undefined">Vertical</option>
+                            </select>
+                        </div>
+                        <span class="info-title d-flex flex-grow-1 align-items-start"
+                              t-if="changes.pos_category_display == 'vertical'">
+                            <span class="me-2">Freeze Vertical Category Column</span>
+                            <input class='form-check-input'
+                                   t-att-checked="changes.freeze_vertical_category_column ? 'checked': ''"
+                                   t-on-change="OnChange"
+                                   type="checkbox"
+                                   name="freeze_vertical_category_column"/>
+                        </span>
+                        <br/>
+                        <br/>
+                        <span class="info-title d-flex flex-grow-1 align-items-start">Pos Category Width (em)</span>
+                        <div class="input-group">
+                            <input class='form-control'
+                                   t-att-value="changes.pos_category_width"
+                                   t-on-change="OnChange"
+                                   type="number"
+                                   name="pos_category_width"/>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <footer class="footer modal-footer">
+                <div class="button cancel btn btn-lg btn-secondary" t-on-click="cancel">
+                    <t t-esc="props.cancelText"/>
+                </div>
+            </footer>
+        </div>
+    </t>
+
+</templates>
